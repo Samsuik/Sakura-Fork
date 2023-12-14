@@ -1,0 +1,67 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Samsuik <kfian294ma4@gmail.com>
+Date: Wed, 13 Dec 2023 17:17:51 +0000
+Subject: [PATCH] Sakura fork update branding
+
+
+diff --git a/build.gradle.kts b/build.gradle.kts
+index b71b33dabf3066e4b098c6de7bdb21222da2e304..4485d63c52ee7bee9e561b0a23e108ecbdfd3962 100644
+--- a/build.gradle.kts
++++ b/build.gradle.kts
+@@ -28,7 +28,7 @@ repositories {
+ dependencies {
+     extraRuntime(platform("net.kyori:adventure-bom:4.15.0-SNAPSHOT"))
+     // Sakura start
+-    implementation(project(":sakura-api"))
++    implementation(project(":sakurafork-api")) // SakuraFork
+     implementation("io.papermc.paper:paper-mojangapi:1.20.3-R0.1-SNAPSHOT") {
+         exclude("io.papermc.paper", "paper-api")
+     }
+@@ -88,7 +88,7 @@ tasks.jar {
+         attributes(
+             "Main-Class" to "org.bukkit.craftbukkit.Main",
+             "Implementation-Title" to "CraftBukkit",
+-            "Implementation-Version" to "git-Sakura-$implementationVersion", // Sakura
++            "Implementation-Version" to "git-SakuraFork-$implementationVersion", // SakuraFork // Sakura
+             "Implementation-Vendor" to date, // Paper
+             "Specification-Title" to "Bukkit",
+             "Specification-Version" to project.version,
+diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
+index ae4930eef9b82d28e798b20b545da589e364cae0..c157e9d06f8669263369f72de360ca2eadea4ace 100644
+--- a/src/main/java/net/minecraft/server/MinecraftServer.java
++++ b/src/main/java/net/minecraft/server/MinecraftServer.java
+@@ -1880,7 +1880,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+ 
+     @DontObfuscate
+     public String getServerModName() {
+-        return "Sakura"; // Sakura - Sakura > // Paper - Paper > // Spigot - Spigot > // CraftBukkit - cb > vanilla!
++        return "SakuraFork"; // SakuraFork - SakuraFork > // Sakura - Sakura > // Paper - Paper > // Spigot - Spigot > // CraftBukkit - cb > vanilla!
+     }
+ 
+     public SystemReport fillSystemReport(SystemReport details) {
+diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
+index 872a30aa8695eaf8784792c84483c417c89dc867..bd6549f463172dae13002678688243dd30d403a7 100644
+--- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
++++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
+@@ -270,7 +270,7 @@ import javax.annotation.Nullable; // Paper
+ import javax.annotation.Nonnull; // Paper
+ 
+ public final class CraftServer implements Server {
+-    private final String serverName = "Sakura"; // Sakura // Paper
++    private final String serverName = "SakuraFork"; // SakuraFork // Sakura // Paper
+     private final String serverVersion;
+     private final String bukkitVersion = Versioning.getBukkitVersion();
+     private final Logger logger = Logger.getLogger("Minecraft");
+diff --git a/src/main/java/org/bukkit/craftbukkit/util/Versioning.java b/src/main/java/org/bukkit/craftbukkit/util/Versioning.java
+index 1941fd2dbdc7a10ddf17e2543a038dbd7fe8c88c..6df016635a58e9d0c7e8208bd4aff9f510830b3d 100644
+--- a/src/main/java/org/bukkit/craftbukkit/util/Versioning.java
++++ b/src/main/java/org/bukkit/craftbukkit/util/Versioning.java
+@@ -11,7 +11,7 @@ public final class Versioning {
+     public static String getBukkitVersion() {
+         String result = "Unknown-Version";
+ 
+-        InputStream stream = Bukkit.class.getClassLoader().getResourceAsStream("META-INF/maven/me.samsuik.sakura/sakura-api/pom.properties"); // Sakura
++        InputStream stream = Bukkit.class.getClassLoader().getResourceAsStream("META-INF/maven/me.samsuik.sakurafork/sakurafork-api/pom.properties"); // SakuraFork // Sakura
+         Properties properties = new Properties();
+ 
+         if (stream != null) {
